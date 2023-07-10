@@ -1,0 +1,130 @@
+<html>
+<head>
+  <title>OpenAI 文章分析</title>
+  <!-- <script src="https://cdn.openai.com/openai.js"></script> -->
+  <script src="./dist/openai-umd.js"></script>
+  <script src="../auth.js"></script>
+  <style>
+    #container {
+      width: 80%;
+      margin: auto;
+    }
+    #input {
+      width: 100%;
+      height: 300px;
+    }
+    #output {
+      width: 100%;
+      height: 300px;
+    }
+    #analyze {
+      display: block;
+      margin: 10px auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>OpenAI 文章分析</h1>
+    <p>请输入或粘贴一篇文章，然后点击分析按钮，网页将使用OpenAI对文章内容进行分析。</p>
+    <textarea id="input" placeholder="在这里输入或粘贴文章">'HOME\nBLOG\nPT-BR\nTURN DARKMONE ON OR OFF\nThoughts on Svelte(Kit), one year and 3 billion requests later\n06 21 2023\n\nSee other articles\n\nLast year my company, was tasked with the mission of building a news website.\n\nSince the project went live, it has experienced significant audience growth, handling hundreds of thousands of visitors every day. Each visitor navigates and interacts with the pages and their components, resulting in approximately 3 billion requests in the last 12 months.\n\nIn this article I will talk about what made me chose Svelte for this project, and what I consider being the good and bad sides of working with both Svelte and SvelteKit.\n\nThe project\n\nTo sum it up: Our customer approached us with a website made years ago that featured old technology, was hard to add features to, had poor performance, and had expensive vertical infrastructure. After several meetings, we came to the conclusion that the best approach was to simply halt the old website development and build a new one from scratch using the best technologies and practices.\n\nGiven the malleability and scalability needs for this project, a new CMS would also need to be built from the ground up. And due to a tight schedule (an MVP had to be in production in ~2 months), we proposed the use of SvelteKit.\n\nSuper-resumed scope: A decoupled backend with a custom CMS and a news website.\nWhy propose SvelteKit in the first place?\n\nI first heard about Svelte back in 2018 in its former version (v2), which was considerably more verbose, but even then it felt like a breath of fresh air for building performant UI at a fast pace.\n\nThen in 2019 Svelte 3 was introduced with an even simpler syntax to the point where you basically wrote JavaScript + HTML + CSS and got fast reactivity as a bonus.\n\nAs a “good tech” enthusiast, that’s hard to ignore.\n\nThen came the era of SSR. Svelte first responded with Sapper (which was the “official” way of doing SSR with Svelte at the time), and then with SvelteKit. Sapper always seemed to be too “uncooked” to be adopted in large projects, but SvelteKit was a whole new league; it provided a robust SSR solution.\n\nSince then, I’ve sporadically adopted Svelte, starting with small projects and gradually moving to bigger ones as it proved to be up to the task.\n\nAnd now we had this project that:\n\nWould make good use of SSR and SEO features;\nWould have its components and styles written from scratch;\nHad a custom CMS with lots of custom reactive layout features;\nHad a deadline of ~2 months.\n\nHaving worked with both React and Svelte, I felt much more confident in meeting such deadline using Svelte due to its productivity, compared to React’s occasional rough edges (i.e. hooks hell, odd performance, verbosity, etc.).\n\nThis is my perception when comparing Svelte to React after working with both.\n\nNow, to be clear here: React is a great reactive library with a massive community and a thriving ecosystem, being the largest in the front-end world. React has a clear happy path that, as long as you follow, will hardly get you hurt. But once you leave this path you may (and more likely will) get into trouble at some point. And sometimes there are projects where you don’t want (or can’t) risk getting in trouble because of the tool you’ve chosen for your UI development. There simply isn’t any room for that.\n\nThis project was one of those cases, and so we moved with Svelte/SvelteKit instead of React/Next.js.\n\nSo, was Svelte/SvelteKit worth it?\n\nOk, let’s go down to business.\n\nAfter deploying this project and running it for approximately 12 months, collaborating with other developers on daily basis for implementing features and fixing bugs, and handling billions of requests and millions of visits throughout this period, I feel like it’s time to talk about the good things, the bad things, and what concerns me.\n\nThe good things\n\nDaily productivity boost: As mentioned earlier, working with Svelte is an absolute delight. It has a simple syntax that takes you no more than half a day to grasp, makes hard to write bad code, and most of the time it just works as expected. If you’re coming from Angular or React, once you learn Svelte you’ll probably feel like a super-hero in the first few days of writing components.\n\nSvelte could be better described as a tool that gets out of your way. I’ve experienced countless occasions where I was solving a challenge that went like this:\n\n– “hmm, I’ll try this crazy approach, but will the framework even accept that?”\n– ”…”\n– “whoa, oddly enough it did… Alright then, next task…”\n\n\nWhen you try crazy approaches in other frameworks, you generally end up with bizarre loops, lifecycle rough edges, and simply refusal to comply (happy path, remember?). In this sense Svelte makes you feel like a hacker with minimal constraints.\n\nPlays well with vanilla libs: Svelte syntax is essentially plain HTML, CSS and JS with a little bit of directives on top. This means that vanilla CSS and JS libraries are easy to integrate into it with minimal changes and bindings. And by wrapping a vanilla lib to a component or an action, you’ve essentially created basic Svelte version of that lib. This is important since Svelte’s community and ecossystem are still relatively small (will talk more about it down below).\n\nHard to find devs, easy to convert devs: If your company adopts Svelte and SvelteKit, you’ll probably have a hard time finding Svelte developers out in the wild. But Svelte is basically HTML + CSS and JS, remember? This means that any front-end developer can easily turn into a Svelte proactive dev in no time. It’s also easier to introduce people that would often stay away from code to coding (e.g. Designers, interns, etc) because the learning curve is so low, and since Svelte isn’t reinventing the wheel, they can always refer to the decades of HTML and CSS tutorials on the internet.\n\nIn this project, one of our devs was a React user with no past Svelte knowledge. After a single day studying Svelte docs, he was already solving tasks. In about two weeks he was already working on some of the most complex components the website had.\n\nA bittersweet routing: SvelteKit has a kinda weird route naming convention, but once you give it a try it starts to make sense. And in bigger projects with lots of routes, this forced convention helps A LOT to quickly scan and understand what is happening just by glancing at your editor file tree.\n\nSeriously? Every week a new framework, make it stop!\n\nIf you’ve never played with Svelte or SvelteKit, and feel like it’s just yet another front-end framework™, consider following these two steps:\n\nWatch this video to understand why Svelte exists.\nGive it a try for a small side project. Really, you’ll thank me later.\nThe bad things\n\nNot all roses, right?\n\nLack of “Svelte” things: As said, Vanilla JavaScript (and HTML/CSS) libs often play well with Svelte, but it gets annoying fast having to search for a Svelte component only to find a GitHub with 2 stars or a npm package with 6 weekly downloads. Sometimes searching for things made in Svelte may look like visiting a ghost town, so if you like to simply plug in well maintained open-source libraries into your project and go from there, take that into account.\n\nThis is slowly changing though, several UI libs started to appear recently, for example.\n\nSolo-dev projects: Another issue is that many projects are one-man armies. Perhaps this issue is more related to open-source ecosystem as a whole, as I’ve also experienced projects like that in Angular, React and React Native, but given the smaller community that Svelte has, it’s more perceivable. Solo OS projects often have prohibitive issues open for ages, lack detailed documentation, and may get abandoned relatively easily. This may be mitigated as the community grows.\n\nVery few established patterns and good tutorials: Take Svelte Stores for instance, it has a simple and elegant contract, but gives you no patterns whatsoever on how to handle it properly as it grows in complexity. Sure, docs and the official tutorial helps, but I feel there is a lack of established patterns and in-depth tutorials for doing more advanced stuff in Svelte and SvelteKit. And once you dig too deep, you may end up facing problems not many have experienced before. This is hard to happen with more popular frameworks as there is always someone who carved instructions into the wall for the next explorers.\n\nNo SSR at the component level: Ok, I have some issues with React Server Components, not because the clear advantages it introduces but mainly because of the feeling React as a whole is making a shift in philosophy to “server-side first”, but this is topic for another article. The point here is that Server Components may actually be very useful, especially if you’re dealing with heavy-SEO-centered content.\n\nTake this example: I have a layout builder, this layout works like a Lego, where you can arrange several “standalone” components together. Now some of these components make their own fetch calls to external high-available sport APIs, weather APIs and so on. How can you make these components SSR if your route do not know about them since the layout itself is dynamic and may change? Once you can only SSR at the route level, you simply can’t SSR your custom layout, the only way to “bypass” that is to use your route to actually read all the layout metadata and write a big switch ordering several fetches to actually feed the layout components dynamically. SSR to the component level would be way easier.\n\nLack of islands architecture: Islands architecture and partial hydration can help you render static HTML with just a small portion of JavaScript for those components who need it. For a website that is 80% static and 20% interactive, this can decrease the request payload dramatically. The smaller your payload, the faster you page loads, and the fewer your CDN bills will cost you. Again, for a website that depends on load time, SEO, and Google ranking, this kind of feature plays a huge part, and SvelteKit lacks it.\n\nThe ugly things\n\nOk, the bad things are bad, I would love to see them addressed in the future, but we can maneuver around them, the ugly things however, are dangerous and may cause serious problems to a project.\n\nReactive declarations and statements: Do you remember the Palantir from the great lore The Lord of the Rings? Or, to use a more contemporary pop reference, Marvel’s Power Infinity Stone? What both those powerful objects have in common is that during the story, many thought to be strong enough to tame their power, and most of those have fallen ill to the consequence of their naivety. Whenever you see a label statement ($:) in a Svelte code, you better treat it like a Palantir or a Power Stone. Reactive declarations and statements feel like powerful magic, and they are, but it’s very easy to hurt yourself by writing code that is almost impossible to debug, and end up having to refactor all your component tree that mixes with this reactivity.\n\nReactive declarations and statements are useful features, just remember not to abuse them, otherwise you may end up switching Svelte’s productivity by headaches and infinite debug sessions, which may directly affect your deadlines.\n\nSvelte’s lack of protagonism: This may be a more anthropological and marketing issue than a technical one, but since technologies with low usage can eventually perish (taking the projects made using them along the grave), and the worst nightmare of a dev is losing support for their tech stack used in several production projects, this is still an important “ugly” topic to talk about.\n\nCredit where is due, Svelte is always featuring as the most beloved tech in several surveys for years now, which obviously drives attention from the audience. But I still have a feeling that the community itself, especially the leaders, often ignore and even disengage from public debates, marketing and narratives in the web dev scenario.\n\nWhat I mean by that? Well, take for instance Dan Abramov, Evan You, Ryan Carniato, Fred K. Schott, and many others. Brilliant minds solving hard problems and working on bleeding-edge technologies helping to push the web forward. They are influential voices shaping the ongoing debates in the web development landscape, and naturally, their technologies become part (often the center) of those discussions. Today, the web development scene is like a bustling public square, filled with ingenious minds shouting “Eureka!” as they interact and share their discoveries in a captivating dance of technical innovation. While Svelte used to be an active participant in this dance, I can’t help but feel it fading from the scene.\n\nIn my native-language we have this proverb that goes: “Quem não é visto, não é lembrado”. Which reads more blunt than it should in English but translates to something like: “Who isn’t being seen, ain’t gonna to be remembered”. I hold immense respect and admiration for Rich and his remarkable work not only in Svelte, but also Rollup, Ractive and many other technologies. Rich and others in the Svelte ecosystem are also brilliant minds, but I don’t see them engaging in this dance with the other brilliant minds anymore. Without this active engagement, I fear that Svelte may not be remembered as it should by the audience.\n\nSo in the end, was Svelte worth it?\n\nIn ~2 months we built a whole CMS from scratch along with a huge website and the backend to feed them both. We have been expanding the codebase continuously, and the overall experience has been fantastic, despite some of the issues discussed earlier.\n\nGiven our team size at the time, I don’t believe we would have been able to meet such a tight deadline without the productivity that Svelte provides. Despite the challenges and drawbacks discussed earlier, SvelteKit has demonstrated itself as a reliable SSR framework for production use, effortlessly handling massive traffic without significant flaws.\n\nFor future projects of all sizes that align with the strengths of Svelte and SvelteKit, I will certainly use them.\n\nPerhaps you started to read this article with the expectation that it would solely promote Svelte, or go the opposite direction providing an opportunity to just criticize it. Neither of these assumptions is correct. It is what it is: Svelte has certainly many good parts that, for my reality, still outweight the bad ones, but there are certainly bad and ugly ones too, like any technology does.\n\nIn my case, Svelte has proven to be effective for both my team and our customers. It has served as a valuable tool for the job at hand, and as long as it keeps pursuing more of the “good things”, our paths will continue to align.\n\nFollow me:\ngithub.com/kazzkiq\ntwitter.com/kazzkiq'</textarea>
+    <button id="analyze">分析</button>
+    <textarea id="output" placeholder="在这里显示分析结果" readonly></textarea>
+  </div>
+  <script>
+    // 初始化OpenAI对象，需要提供一个API密钥
+    const openai = OpenAI.createOpenAI(window.openAIKey);
+    openai.listModels().then((response) => {
+        console.log("response", response)
+    })
+    const model = 'gpt-3.5-turbo'
+
+    // 获取页面元素
+    const input = document.getElementById("input");
+    const output = document.getElementById("output");
+    const analyze = document.getElementById("analyze");
+    const prompt = '你是一个软件技术专家和摘要总结专家，你的职责是分析博客或者论文。下面会分段给出一篇博客的内容，你需要根据这篇博客的内容，写一篇关于这篇博客的中文总结。内容需详细且具体。'
+    async function callOpenAI(article, arr) {
+        await openai.createChatCompletion({
+        model,
+        // messages: article,
+        messages: [
+            // {
+            //     "role": 'system',
+            //     content:  prompt
+            // },
+            {
+                "role": 'user',
+                content: prompt
+             },
+            ...arr,
+            {
+                "role": 'user',
+                content: article
+            },
+        ],
+        max_tokens: 2048,
+        // stop: ["关键词："],
+        temperature: 0,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+        n: 1,
+        stream: false,
+      }).then((response) => {
+        // 获取返回的摘要
+        const summary = response.data.choices[0].message.content;
+        arr.push({
+            role: 'assistant',
+            content: summary 
+        })
+        // output.value =  output.value + "\n" + summary;
+       output.value = summary; 
+      });
+    
+    }
+
+    // 定义一个函数，用于对文章进行分析
+    async function analyzeArticle() {
+      // 获取输入的文章内容
+      const article = input.value;
+
+      // 如果文章内容为空，提示用户输入
+      if (!article) {
+        alert("请输入或粘贴一篇文章");
+        return;
+      }
+
+      // 清空输出框
+      output.value = "";
+      const leng = calcTokenLength(article);
+      const max_tokens = 2048
+      const loopLen = Math.ceil(leng / max_tokens);
+      const article1 = article.slice(0, article.length / 2) 
+      // 调用OpenAI的接口，使用davinci引擎对文章进行分析
+      // 设置最大令牌长度为2048，返回一个摘要和几个关键词
+      let i = 0
+      let arr = []
+      while(i < loopLen) {
+        if (i == 0) {
+            // arr.push({
+            //     role: 'user',
+            //     content: article.slice(0, Math.ceil(article.length / loopLen))
+            // })
+            await callOpenAI(article.slice(0, Math.ceil(article.length / loopLen)), arr)
+        } else {
+            // arr.push({
+            //     role: 'assistant',
+            //     content: article.slice(Math.ceil(article.length / loopLen) * i, Math.ceil(article.length / loopLen) * (i + 1))
+            // })
+            await callOpenAI(article.slice(Math.ceil(article.length / loopLen) * i, Math.ceil(article.length / loopLen) * (i + 1)), arr) 
+        }
+        i++;
+      }
+    }
+    // 给分析按钮添加点击事件监听器，调用分析函数
+    analyze.addEventListener("click", analyzeArticle);
+  </sc>
+</body>
+</html>
+
+
